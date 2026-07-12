@@ -8,7 +8,9 @@ import Home from './pages/public/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import HomeCliente from './pages/cliente/HomeCliente';
-import CrearEmprendimiento from './pages/cliente/pages/CrearEmprendimiento';
+import CrearEmprendimiento from './pages/cliente/pages/CrearEmprendimiento/CrearEmprendimiento';
+import MisEmprendimientos from './pages/cliente/pages/MisEmprendimientos/MisEmprendimientos';
+import Emprendimientos from './pages/cliente/pages/Emprendimientos/Emprendimientos';
 
 const router = createBrowserRouter([
   {
@@ -44,13 +46,18 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomeCliente />,
-        handle: {
-          navbar: true,
-        },
       },
       {
         path: 'crear-emprendimiento',
         element: <CrearEmprendimiento />,
+      },
+      {
+        path: 'mis-emprendimientos',
+        element: <MisEmprendimientos />,
+      },
+      {
+        path: 'emprendimientos',
+        element: <Emprendimientos />,
       },
     ],
   },

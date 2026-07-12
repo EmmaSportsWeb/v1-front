@@ -1,25 +1,33 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+
 import authService from '../services/authService';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+
   const [token, setToken] = useState(localStorage.getItem('token'));
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadUser = async () => {
       if (!token) {
         setLoading(false);
+
         return;
       }
 
       try {
         const response = await authService.me();
 
-        setUser(response.data.usuario);
+        console.log('ME:', response);
+
+        setUser(response.data ?? response);
       } catch (error) {
+        console.error('Error cargando usuario:', error);
+
         logout();
       } finally {
         setLoading(false);
@@ -37,6 +45,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem('token', token);
 
     setToken(token);
+
     setUser(usuario);
 
     return response;
@@ -50,6 +59,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem('token', token);
 
     setToken(token);
+
     setUser(usuario);
 
     return response;
@@ -59,12 +69,13 @@ export function AuthProvider({ children }) {
     try {
       await authService.logout();
     } catch (error) {
-      console.log(error);
+      console.log('Error cerrando sesión:', error);
     }
 
     localStorage.removeItem('token');
 
     setToken(null);
+
     setUser(null);
   };
 

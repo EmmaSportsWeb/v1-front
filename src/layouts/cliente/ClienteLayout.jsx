@@ -9,14 +9,14 @@ export default function ClienteLayout() {
   const showNavbar = matches.some((route) => route.handle?.navbar === true);
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen">
       <SidebarCliente />
 
       <div className="lg:ml-72">
         {showNavbar && <NavbarCliente />}
 
-        <main className="p-4 sm:p-6 lg:p-8">
-          <div className="min-h-[calc(100vh-2rem)] rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all sm:p-8">
+        <main className="p-4 sm:p-6 lg:p-4">
+          <div className="min-h-[calc(100vh-2rem)] w-full rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all sm:p-8">
             <Outlet />
           </div>
         </main>

@@ -1,8 +1,6 @@
 import { Bell, Menu, Search } from 'lucide-react';
 import { useState } from 'react';
 
-import MobileSidebar from './MobileSidebar';
-
 export default function NavbarCliente() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
