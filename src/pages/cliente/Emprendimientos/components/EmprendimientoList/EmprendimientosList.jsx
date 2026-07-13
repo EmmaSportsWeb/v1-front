@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 
-import EmprendimientoCard from '../../pages/components/card-emprendimiento/EmprendimientoCard';
+import EmprendimientoCard from '../CardEmprendimiento/EmprendimientoCard';
 
 export default function EmprendimientosList({ titulo, descripcion, emptyTitle, emptyDescription, filtrados, loading, busqueda, setBusqueda }) {
   return (

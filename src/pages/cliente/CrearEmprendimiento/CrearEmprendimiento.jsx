@@ -1,19 +1,19 @@
 import { useState } from 'react';
 
-import { useAuth } from '../../../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
-import useCrearEmprendimiento from './hooks/useCrearEmprendimiento';
+import useCrearEmprendimiento from '../../cliente/CrearEmprendimiento/hooks/useCrearEmprendimiento';
 
-import PreviewCard from '../../components/CrearEmprendimiento/PreviewCard';
-import UploadCard from '../../components/CrearEmprendimiento/UploadCard';
-import Input from '../../components/CrearEmprendimiento/Input';
-import Header from '../../components/CrearEmprendimiento/Header';
-import FormSection from '../../components/CrearEmprendimiento/FormSection';
-import FormTextarea from '../../components/CrearEmprendimiento/FormTextarea';
+import PreviewCard from '../CrearEmprendimiento/components/PreviewCard';
+import UploadCard from '../CrearEmprendimiento/components/UploadCard';
+import Input from '../CrearEmprendimiento/components/Input';
+import Header from '../CrearEmprendimiento/components/Header';
+import FormSection from '../CrearEmprendimiento/components/FormSection';
+import FormTextarea from '../CrearEmprendimiento/components/FormTextarea';
 
-import SubscriptionModal from '../../../../components/ui/SubscriptionModal';
+import SubscriptionModal from '../../../components/ui/SubscriptionModal';
 
-import { informacionFields, contactoFields, redesFields, ubicacionFields } from '../../components/CrearEmprendimiento/config/emprendimientoFields';
+import { informacionFields, contactoFields, redesFields, ubicacionFields } from '../CrearEmprendimiento/components/config/emprendimientoFields';
 
 export default function CrearEmprendimiento() {
   const { user } = useAuth();

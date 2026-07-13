@@ -22,8 +22,6 @@ export function AuthProvider({ children }) {
       try {
         const response = await authService.me();
 
-        console.log('ME:', response);
-
         setUser(response.data ?? response);
       } catch (error) {
         console.error('Error cargando usuario:', error);

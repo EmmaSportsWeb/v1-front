@@ -1,8 +1,8 @@
-import EmprendedorService from '../../../../services/EmprendedorService';
+import EmprendedorService from './services/MisEmprendimietosService';
 
-import useEmprendimientos from '../../pages/hooks/useEmprendimientos';
+import useEmprendimientos from '../../cliente/Emprendimientos/hooks/useEmprendimientos';
 
-import EmprendimientosList from '../../components/Emprendimientos/EmprendimientosList';
+import EmprendimientosList from '../../cliente/Emprendimientos/components/EmprendimientoList/EmprendimientosList';
 
 export default function MisEmprendimientos() {
   const estado = useEmprendimientos(EmprendedorService.getMine);

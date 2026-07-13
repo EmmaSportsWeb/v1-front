@@ -33,8 +33,6 @@ export default function useLogin() {
     try {
       const response = await login(form);
 
-      console.log('Respuesta login:', response);
-
       const usuario = response.data.usuario;
 
       setSuccess(true);

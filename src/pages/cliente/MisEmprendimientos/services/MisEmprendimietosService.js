@@ -1,6 +1,6 @@
-import api from '../services/api';
+import api from '../../../../services/api';
 
-const EmprendedorService = {
+const MisEmprendimietosService = {
   /**
    * Emprendimientos del usuario autenticado
    */
@@ -30,4 +30,4 @@ const EmprendedorService = {
   },
 };
 
-export default EmprendedorService;
+export default MisEmprendimietosService;

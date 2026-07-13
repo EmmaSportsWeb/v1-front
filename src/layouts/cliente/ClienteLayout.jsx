@@ -1,7 +1,7 @@
 import { Outlet, useMatches } from 'react-router-dom';
 
-import NavbarCliente from '../../pages/cliente/components/HomeCliente/NavbarCliente';
-import SidebarCliente from '../../pages/cliente/components/HomeCliente/SidebarCliente';
+import NavbarCliente from '../../pages/cliente/HomeCliente/components/NavbarCliente';
+import SidebarCliente from '../../pages/cliente/HomeCliente/components/SidebarCliente';
 
 export default function ClienteLayout() {
   const matches = useMatches();

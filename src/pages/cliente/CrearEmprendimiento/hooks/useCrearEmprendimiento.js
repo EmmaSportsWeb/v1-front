@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import EmprendedorService from '../../../../../services/EmprendedorService';
+import EmprendedorService from '../../MisEmprendimientos/services/MisEmprendimietosService';
 
 export default function useCrearEmprendimiento() {
   const navigate = useNavigate();

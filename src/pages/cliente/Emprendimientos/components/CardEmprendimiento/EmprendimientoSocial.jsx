@@ -15,15 +15,12 @@ export default function EmprendimientoSocial({ emprendimiento }) {
   if (!available.length) return null;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      {/* Título */}
-      <div className="mb-4 text-sm font-semibold text-slate-700">Conéctanos</div>
-
+    <div className="mt-2 mb-2">
       {/* Divider */}
-      <div className="mb-4 h-px w-full bg-slate-100" />
+      <div className="mb-4 h-px w-full" />
 
       {/* Iconos */}
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center gap-3">
         {available.map((social) => (
           <a
             key={social.key}

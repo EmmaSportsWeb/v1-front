@@ -1,5 +1,5 @@
-import DashboardHero from './components/HomeCliente/DashboardHero';
-import QuickActions from './components/HomeCliente/QuickActions';
+import DashboardHero from './components/DashboardHero';
+import QuickActions from './components/QuickActions';
 
 export default function HomeCliente() {
   return (

@@ -1,8 +1,8 @@
-import emprendimientoService from '../../../../services/emprendimientoService';
+import emprendimientoService from './services/emprendimientoService';
 
-import useEmprendimientos from '../../pages/hooks/useEmprendimientos';
+import useEmprendimientos from '../../cliente/Emprendimientos/hooks/useEmprendimientos';
 
-import EmprendimientosList from '../../components/Emprendimientos/EmprendimientosList';
+import EmprendimientosList from './components/EmprendimientoList/EmprendimientosList';
 
 export default function Emprendimientos() {
   const estado = useEmprendimientos(emprendimientoService.getAll);
