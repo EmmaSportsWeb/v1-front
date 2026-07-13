@@ -1,31 +1,26 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-
 import authService from '../services/authService';
 
+// 🔥 FALTABA ESTO
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-
   const [token, setToken] = useState(localStorage.getItem('token'));
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadUser = async () => {
       if (!token) {
         setLoading(false);
-
         return;
       }
 
       try {
         const response = await authService.me();
-
         setUser(response.data ?? response);
       } catch (error) {
         console.error('Error cargando usuario:', error);
-
         logout();
       } finally {
         setLoading(false);
@@ -35,6 +30,21 @@ export function AuthProvider({ children }) {
     loadUser();
   }, [token]);
 
+  // 🔥 NUEVO MÉTODO
+  const getPerfil = async () => {
+    try {
+      const response = await authService.me();
+
+      const usuario = response.data ?? response;
+
+      setUser(usuario);
+
+      return usuario;
+    } catch (error) {
+      console.error('Error refrescando usuario:', error);
+    }
+  };
+
   const register = async (data) => {
     const response = await authService.register(data);
 
@@ -43,7 +53,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem('token', token);
 
     setToken(token);
-
     setUser(usuario);
 
     return response;
@@ -57,7 +66,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem('token', token);
 
     setToken(token);
-
     setUser(usuario);
 
     return response;
@@ -73,7 +81,6 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('token');
 
     setToken(null);
-
     setUser(null);
   };
 
@@ -86,6 +93,7 @@ export function AuthProvider({ children }) {
         register,
         login,
         logout,
+        getPerfil,
       }}
     >
       {children}
@@ -93,6 +101,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// 🔥 FALTABA ESTO TAMBIÉN
 export function useAuth() {
   return useContext(AuthContext);
 }

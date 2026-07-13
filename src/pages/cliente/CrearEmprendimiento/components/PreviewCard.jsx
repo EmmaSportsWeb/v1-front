@@ -1,5 +1,4 @@
 import { Store, Mail, Phone, Globe, MapPin, Tag } from 'lucide-react';
-
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube, FaWhatsapp } from 'react-icons/fa6';
 
 export default function PreviewCard({ form }) {
@@ -7,40 +6,28 @@ export default function PreviewCard({ form }) {
     <div className="sticky top-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
       {/* Banner */}
       <div className="relative h-44" style={{ background: form.color }}>
-        {form.banner_preview && (
-          <img src={form.banner_preview} alt="Banner" className="h-full w-full object-cover" />
-        )}
+        {form.banner_preview && <img src={form.banner_preview} alt="Banner" className="h-full w-full object-cover" />}
       </div>
 
       <div className="relative px-6 pb-6">
         {/* Logo */}
         <div className="-mt-14 flex h-28 w-28 items-center justify-center overflow-hidden rounded-3xl border-4 border-white bg-slate-100 shadow-lg">
-          {form.logo_preview ? (
-            <img src={form.logo_preview} alt="Logo" className="h-full w-full object-cover" />
-          ) : (
-            <Store size={42} className="text-slate-400" />
-          )}
+          {form.logo_preview ? <img src={form.logo_preview} alt="Logo" className="h-full w-full object-cover" /> : <Store size={42} className="text-slate-400" />}
         </div>
 
         {/* Nombre */}
-        <h2 className="mt-5 text-2xl font-bold text-slate-900">
-          {form.nombre || 'Nombre del emprendimiento'}
-        </h2>
+        <h2 className="mt-5 text-2xl font-bold text-slate-900">{form.nombre || 'Nombre del emprendimiento'}</h2>
 
         {/* Categoría */}
         {form.categoria && (
           <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
             <Tag size={14} />
-
             {form.categoria}
           </div>
         )}
 
         {/* Descripción */}
-        <p className="mt-5 leading-relaxed text-slate-600">
-          {form.descripcion ||
-            'Aquí aparecerá la descripción de tu emprendimiento. Cuéntales a tus clientes qué haces y qué te hace diferente.'}
-        </p>
+        <p className="mt-5 leading-relaxed text-slate-600">{form.descripcion || 'Aquí aparecerá la descripción de tu emprendimiento. Cuéntales a tus clientes qué haces y qué te hace diferente.'}</p>
 
         {/* Contacto */}
         <div className="mt-8 space-y-3">
@@ -50,12 +37,7 @@ export default function PreviewCard({ form }) {
 
           {form.sitio_web && <Item icon={<Globe size={17} />} text={form.sitio_web} />}
 
-          {(form.ciudad || form.region || form.pais) && (
-            <Item
-              icon={<MapPin size={17} />}
-              text={[form.ciudad, form.region, form.pais].filter(Boolean).join(', ')}
-            />
-          )}
+          {(form.direccion || form.ciudad || form.region || form.pais) && <Item icon={<MapPin size={17} />} text={[form.direccion, form.ciudad, form.region, form.pais].filter(Boolean).join(', ')} />}
         </div>
 
         {/* Redes */}

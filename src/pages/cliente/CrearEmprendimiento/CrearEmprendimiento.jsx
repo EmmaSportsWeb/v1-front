@@ -18,9 +18,11 @@ import { informacionFields, contactoFields, redesFields, ubicacionFields } from 
 export default function CrearEmprendimiento() {
   const { user } = useAuth();
 
-  const { form, errors, handleChange, handleImage, handleSubmit } = useCrearEmprendimiento();
-
   const [showSubscription, setShowSubscription] = useState(false);
+
+  const { form, errors, handleChange, handleImage, handleSubmit } = useCrearEmprendimiento({
+    setShowSubscription,
+  });
 
   const submit = () => {
     console.log('Usuario actual:', user);
@@ -59,21 +61,15 @@ export default function CrearEmprendimiento() {
         <Header />
 
         <div className="mt-10 grid gap-8 lg:grid-cols-3">
-          {/* PREVIEW */}
-
           <aside className="lg:col-span-1">
             <div className="sticky top-8">
               <PreviewCard form={form} />
             </div>
           </aside>
 
-          {/* FORMULARIO */}
-
           <div className="lg:col-span-2">
             <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50">
               <div className="space-y-10">
-                {/* INFORMACIÓN */}
-
                 <section>
                   <FormSection title="Información general" fields={informacionFields} form={form} errors={errors} onChange={handleChange} />
 
@@ -81,8 +77,6 @@ export default function CrearEmprendimiento() {
                     <FormTextarea value={form.descripcion} error={errors.descripcion} onChange={handleChange} />
                   </div>
                 </section>
-
-                {/* IMÁGENES */}
 
                 <section>
                   <h2 className="mb-6 text-lg font-semibold text-slate-900">Identidad visual</h2>
@@ -94,19 +88,11 @@ export default function CrearEmprendimiento() {
                   </div>
                 </section>
 
-                {/* CONTACTO */}
-
                 <FormSection title="Contacto" fields={contactoFields} form={form} errors={errors} onChange={handleChange} />
-
-                {/* REDES */}
 
                 <FormSection title="Redes sociales" fields={redesFields} form={form} errors={errors} onChange={handleChange} />
 
-                {/* UBICACIÓN */}
-
                 <FormSection title="Ubicación" fields={ubicacionFields} form={form} errors={errors} onChange={handleChange} />
-
-                {/* COLOR */}
 
                 <section>
                   <h2 className="mb-6 text-lg font-semibold text-slate-900">Apariencia</h2>
@@ -127,8 +113,6 @@ export default function CrearEmprendimiento() {
                   </div>
                 </section>
 
-                {/* BOTÓN */}
-
                 <button onClick={submit} className="w-full rounded-xl bg-emerald-600 py-3 font-semibold text-white transition hover:bg-emerald-500">
                   Crear emprendimiento
                 </button>
@@ -137,8 +121,6 @@ export default function CrearEmprendimiento() {
           </div>
         </div>
       </div>
-
-      {/* MODAL PLANES */}
 
       <SubscriptionModal open={showSubscription} onClose={() => setShowSubscription(false)} />
     </div>

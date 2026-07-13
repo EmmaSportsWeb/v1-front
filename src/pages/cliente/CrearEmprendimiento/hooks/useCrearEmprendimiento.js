@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import EmprendedorService from '../../MisEmprendimientos/services/MisEmprendimietosService';
+import { useAuth } from '../../../../context/AuthContext';
 
-export default function useCrearEmprendimiento() {
+export default function useCrearEmprendimiento({ setShowSubscription }) {
   const navigate = useNavigate();
+
+  const { getPerfil } = useAuth(); // 🔥 obtener función para refrescar usuario
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState(null);
@@ -59,7 +62,6 @@ export default function useCrearEmprendimiento() {
     if (!files?.length) return;
 
     const file = files[0];
-
     const preview = URL.createObjectURL(file);
 
     setForm((prev) => ({
@@ -82,10 +84,7 @@ export default function useCrearEmprendimiento() {
       const data = new FormData();
 
       Object.entries(form).forEach(([key, value]) => {
-        // No enviar previews
-        if (key === 'logo_preview' || key === 'banner_preview') {
-          return;
-        }
+        if (key === 'logo_preview' || key === 'banner_preview') return;
 
         if (value !== null && value !== '') {
           data.append(key, value);
@@ -96,57 +95,44 @@ export default function useCrearEmprendimiento() {
 
       console.log('Respuesta emprendimiento:', response.data);
 
-      /*
-      |--------------------------------------------------------------------------
-      | Ya existe un emprendimiento
-      |--------------------------------------------------------------------------
-      */
+      // 🔥 SOLUCIÓN: refrescar usuario después de crear
+      await getPerfil();
 
-      if (response.data.message === 'Ya tienes un emprendimiento creado.') {
-        setMessage(response.data.message);
-
-        setTimeout(() => {
-          navigate('/app/emprendimientos');
-        }, 2000);
-
-        return;
-      }
-
-      /*
-      |--------------------------------------------------------------------------
-      | Creado correctamente
-      |--------------------------------------------------------------------------
-      */
+      // opcional: mensaje UX
+      setMessage('Emprendimiento creado correctamente');
 
       navigate('/app/emprendimientos');
     } catch (error) {
+      console.error('Error creando emprendimiento:', error.response?.data || error);
+
       /*
-      |--------------------------------------------------------------------------
-      | Errores de validación Laravel
-      |--------------------------------------------------------------------------
+      |----------------------------------------------------------------------
+      | Límite alcanzado
+      |----------------------------------------------------------------------
       */
-
-      if (error.response?.status === 422) {
-        setErrors(error.response.data.errors);
-
+      if (error.response?.status === 403 && error.response?.data?.data?.limit_reached) {
+        setShowSubscription(true);
         return;
       }
 
-      console.error('Error creando emprendimiento:', error.response?.data || error);
+      /*
+      |----------------------------------------------------------------------
+      | Validaciones Laravel
+      |----------------------------------------------------------------------
+      */
+      if (error.response?.status === 422) {
+        setErrors(error.response.data.errors);
+        return;
+      }
     }
   };
 
   return {
     form,
-
     errors,
-
     message,
-
     handleChange,
-
     handleImage,
-
     handleSubmit,
   };
 }
